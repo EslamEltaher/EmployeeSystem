@@ -58,20 +58,26 @@ namespace EmployeeSystem.Presentation.Controllers
         }
 
         // GET: Country/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
-            return View();
+            var country = await _uow.CountryRepository.GetCountryById(id);
+            var viewModel = Mapper.MapToCountryViewModel(country);
+            return View(viewModel);
         }
 
         // POST: Country/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> Edit(int id, CountryViewModel vm)
         {
             try
             {
                 // TODO: Add update logic here
-
+                var country = Mapper.MapToCountry(vm);
+                country.Id = id;
+                _uow.CountryRepository.UpdateCountry(country);
+                await _uow.Save();
+                
                 return RedirectToAction(nameof(Index));
             }
             catch
