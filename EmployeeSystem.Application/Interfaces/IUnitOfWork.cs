@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace EmployeeSystem.Application.Interfaces
 {
-    interface IUnitOfWork
+    public interface IUnitOfWork
     {
-        IEmployeeRepository EmployeeRepository { get; set; }
-        ICountryRepository CountryRepository { get; set; }
+        IEmployeeRepository EmployeeRepository { get; }
+        ICountryRepository CountryRepository { get; }
 
         Task Save();
     }
