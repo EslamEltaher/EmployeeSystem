@@ -33,12 +33,16 @@ namespace EmployeeSystem.Persistence.Repositories
 
         public async Task<IEnumerable<Employee>> GetAllEmployees()
         {
-            return await _context.Employees.ToListAsync();
+            return await _context.Employees
+                .Include(e => e.Country)
+                .ToListAsync();
         }
 
         public async Task<Employee> GetEmployeeById(int id)
         {
-            return await _context.Employees.FirstOrDefaultAsync(e => e.Id == id);
+            return await _context.Employees
+                .Include(e => e.Country)
+                .FirstOrDefaultAsync(e => e.Id == id);
         }
 
     }
