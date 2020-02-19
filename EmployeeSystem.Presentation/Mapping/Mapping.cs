@@ -38,6 +38,7 @@ namespace EmployeeSystem.Presentation.Mapping
                 CountryID = employee.CountryID,
             };
         }
+
         public static Employee MapToEmployee(UpdateEmployeeViewModel employee)
         {
             return new Employee()
@@ -63,6 +64,25 @@ namespace EmployeeSystem.Presentation.Mapping
                 BirthDate = employee.BirthDate,
                 Photo = employee.Photo,
                 CountryID = employee.CountryID
+            };
+        }
+
+
+        public static Country MapToCountry(CountryViewModel viewModel)
+        {
+            return new Country()
+            {
+                CountryCode = viewModel.CountryCode,
+                CountryName = viewModel.CountryName
+            };
+        }
+
+        public static CountryViewModel MapToCountryViewModel(Country viewModel)
+        {
+            return new CountryViewModel()
+            {
+                CountryCode = viewModel.CountryCode,
+                CountryName = viewModel.CountryName
             };
         }
     }
