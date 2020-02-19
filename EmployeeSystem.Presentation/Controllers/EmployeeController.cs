@@ -21,10 +21,12 @@ namespace EmployeeSystem.Presentation.Controllers
         }
 
         // GET: Employee
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(EmployeeFiltrationCriteria criteria)
         {
-            var employees = await _uow.EmployeeRepository.GetAllEmployees();
+            var employees = await _uow.EmployeeRepository.SearchEmployees(criteria);
             var employeeList = employees.Select(e => Mapper.MapToEmployeeViewModel(e));
+            ViewData.Add("criteria",criteria);
+
             return View(employeeList);
         }
 

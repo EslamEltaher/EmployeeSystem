@@ -9,6 +9,20 @@
 <p>
     <a asp-action="Create">Add New Employee</a>
 </p>
+<div>
+    <form method="get">
+        <h4>Filter Employees</h4>
+        <label for="Name">Name</label>              <input class="form-control" name="Name" value="@((ViewData["criteria"] as EmployeeSystem.Application.Models.EmployeeFiltrationCriteria).Name)" />
+        <label for="CountryName">Country Name</label> <input class="form-control" name="CountryName" value="@((ViewData["criteria"] as EmployeeSystem.Application.Models.EmployeeFiltrationCriteria).CountryName)" />
+        <label for="Title">Title</label>            <input class="form-control" name="Title" value="@((ViewData["criteria"] as EmployeeSystem.Application.Models.EmployeeFiltrationCriteria).Title)" />
+        <label for="SalaryFrom">SalaryFrom</label>  <input class="form-control" name="SalaryFrom" value="@((ViewData["criteria"] as EmployeeSystem.Application.Models.EmployeeFiltrationCriteria).SalaryFrom)" />
+        <label for="SalaryTo">SalaryTo</label>      <input class="form-control" name="SalaryTo" value="@((ViewData["criteria"] as EmployeeSystem.Application.Models.EmployeeFiltrationCriteria).SalaryTo)" />
+        <br />
+        <button class="btn btn-primary" type="submit">Filter Employees</button>
+    </form>
+</div>
+<br />
+
 <table class="table">
     <thead>
         <tr>
@@ -40,38 +54,39 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Salary)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BirthDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Photo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CountryName)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Salary)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BirthDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Photo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CountryName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

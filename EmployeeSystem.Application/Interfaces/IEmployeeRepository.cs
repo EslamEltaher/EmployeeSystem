@@ -10,6 +10,7 @@ namespace EmployeeSystem.Application.Interfaces
     {
         Task<Employee> GetEmployeeById(int id);
         Task<IEnumerable<Employee>> GetAllEmployees();
+        Task<IEnumerable<Employee>> SearchEmployees(EmployeeFiltrationCriteria criteria);
 
         void AddEmployee(Employee employee);
         void UpdateEmployee(Employee employee);
