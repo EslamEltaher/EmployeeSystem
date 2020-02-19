@@ -97,18 +97,24 @@ namespace EmployeeSystem.Presentation.Controllers
         }
 
         // GET: Employee/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            return View();
+            var employee = await _uow.EmployeeRepository.GetEmployeeById(id);
+            var viewModel = Mapper.MapToEmployeeViewModel(employee);
+            return View(viewModel);
         }
 
         // POST: Employee/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> Delete(int id, IFormCollection collection)
         {
             try
             {
+                var employee = await _uow.EmployeeRepository.GetEmployeeById(id);
+                _uow.EmployeeRepository.DeleteEmployee(employee);
+                await _uow.Save();
+
                 return RedirectToAction(nameof(Index));
             }
             catch
