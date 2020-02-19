@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using EmployeeSystem.Application.Interfaces;
 using EmployeeSystem.Application.Models;
 using EmployeeSystem.Presentation.Mapping;
+using EmployeeSystem.Presentation.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -34,18 +35,23 @@ namespace EmployeeSystem.Presentation.Controllers
         }
 
         // GET: Employee/Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
-            return View();
+            var countries = await _uow.CountryRepository.GetAllCountries();
+            var viewModel = new AddEmployeeViewModel() {
+                Countries = countries.ToList()
+            };
+            return View(viewModel);
         }
 
         // POST: Employee/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(Employee employee)
+        public async Task<ActionResult> Create(AddEmployeeViewModel addEmployee)
         {
             try
             {
+                var employee = Mapper.MapToEmployee(addEmployee);
                 _uow.EmployeeRepository.AddEmployee(employee);
                 await _uow.Save();
 

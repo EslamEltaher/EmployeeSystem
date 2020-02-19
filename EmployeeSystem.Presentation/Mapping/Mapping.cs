@@ -24,5 +24,19 @@ namespace EmployeeSystem.Presentation.Mapping
                 CountryName = employee.Country.CountryName,
             };
         }
+
+        public static Employee MapToEmployee(AddEmployeeViewModel employee)
+        {
+            return new Employee()
+            {
+                Name = employee.Name,
+                Title = employee.Title,
+                Salary = employee.Salary,
+                Email = employee.Email,
+                BirthDate = employee.BirthDate,
+                Photo = employee.Photo,
+                CountryID = employee.CountryID,
+            };
+        }
     }
 }
