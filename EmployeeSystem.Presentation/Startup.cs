@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EmployeeSystem.Application.Interfaces;
 using EmployeeSystem.Persistence;
+using EmployeeSystem.Persistence.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -29,6 +31,10 @@ namespace EmployeeSystem.Presentation
             services.AddDbContext<EmployeeContext>(options => 
                 options.UseSqlServer(Configuration.GetConnectionString("Default"))
             );
+
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddScoped<ICountryRepository, CountryRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.Configure<CookiePolicyOptions>(options =>
             {
