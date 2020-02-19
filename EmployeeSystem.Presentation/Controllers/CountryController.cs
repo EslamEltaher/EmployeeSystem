@@ -27,9 +27,11 @@ namespace EmployeeSystem.Presentation.Controllers
         }
 
         // GET: Country/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(int id)
         {
-            return View();
+            var country = await _uow.CountryRepository.GetCountryById(id);
+
+            return View(country);
         }
 
         // GET: Country/Create
@@ -87,20 +89,25 @@ namespace EmployeeSystem.Presentation.Controllers
         }
 
         // GET: Country/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            return View();
+            var country = await _uow.CountryRepository.GetCountryById(id);
+
+            return View(country);
         }
 
         // POST: Country/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> Delete(int id, Country collection)
         {
             try
             {
                 // TODO: Add delete logic here
-
+                var country = await _uow.CountryRepository.GetCountryById(id);
+                _uow.CountryRepository.DeleteCountry(country);
+                await 
+                    _uow.Save();
                 return RedirectToAction(nameof(Index));
             }
             catch
