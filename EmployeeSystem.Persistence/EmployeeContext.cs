@@ -8,6 +8,8 @@ namespace EmployeeSystem.Persistence
 {
     public class EmployeeContext : DbContext
     {
+        public EmployeeContext(DbContextOptions options) : base(options) { }
+
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Country> Countries { get; set; }
 
