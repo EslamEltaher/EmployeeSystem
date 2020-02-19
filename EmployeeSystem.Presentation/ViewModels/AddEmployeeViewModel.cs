@@ -10,11 +10,15 @@ namespace EmployeeSystem.Presentation.ViewModels
     public class AddEmployeeViewModel
     {
         [Required]
+        [MaxLength(50)]
         public string Name { get; set; }
         [Required]
+        [MaxLength(50)]
         public string Title { get; set; }
         public float Salary { get; set; }
         [Required]
+        [MaxLength(50)]
+        [EmailAddress]
         public string Email { get; set; }
         public DateTime BirthDate { get; set; }
         public byte[] Photo { get; set; }
