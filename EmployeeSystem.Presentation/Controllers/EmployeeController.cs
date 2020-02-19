@@ -64,18 +64,30 @@ namespace EmployeeSystem.Presentation.Controllers
         }
 
         // GET: Employee/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
-            return View();
+            var employee = await _uow.EmployeeRepository.GetEmployeeById(id);
+
+            var viewModel = Mapper.MapToUpdateEmployeeViewModel(employee);
+            var countries = await _uow.CountryRepository.GetAllCountries();
+            viewModel.Countries = countries.ToList();
+
+            return View(viewModel);
         }
 
         // POST: Employee/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> Edit(int id, UpdateEmployeeViewModel updateEmployee)
         {
             try
             {
+                var employee = Mapper.MapToEmployee(updateEmployee);
+                employee.Id = id;
+
+                _uow.EmployeeRepository.UpdateEmployee(employee);
+                await _uow.Save();
+
                 return RedirectToAction(nameof(Index));
             }
             catch

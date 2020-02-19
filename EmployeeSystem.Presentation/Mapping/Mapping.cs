@@ -38,5 +38,32 @@ namespace EmployeeSystem.Presentation.Mapping
                 CountryID = employee.CountryID,
             };
         }
+        public static Employee MapToEmployee(UpdateEmployeeViewModel employee)
+        {
+            return new Employee()
+            {
+                Name = employee.Name,
+                Title = employee.Title,
+                Salary = employee.Salary,
+                Email = employee.Email,
+                BirthDate = employee.BirthDate,
+                Photo = employee.Photo,
+                CountryID = employee.CountryID,
+            };
+        }
+
+        public static UpdateEmployeeViewModel MapToUpdateEmployeeViewModel(Employee employee)
+        {
+            return new UpdateEmployeeViewModel()
+            {
+                Name = employee.Name,
+                Title = employee.Title,
+                Salary = employee.Salary,
+                Email = employee.Email,
+                BirthDate = employee.BirthDate,
+                Photo = employee.Photo,
+                CountryID = employee.CountryID
+            };
+        }
     }
 }
