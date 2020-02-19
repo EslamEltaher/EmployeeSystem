@@ -29,9 +29,11 @@ namespace EmployeeSystem.Presentation.Controllers
         }
 
         // GET: Employee/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(int id)
         {
-            return View();
+            var employee = await _uow.EmployeeRepository.GetEmployeeById(id);
+            var viewModel = Mapper.MapToEmployeeViewModel(employee);
+            return View(viewModel);
         }
 
         // GET: Employee/Create
