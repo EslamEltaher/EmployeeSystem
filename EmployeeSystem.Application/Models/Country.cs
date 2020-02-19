@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace EmployeeSystem.Application.Models
@@ -12,6 +13,8 @@ namespace EmployeeSystem.Application.Models
     public class Country
     {
         public int Id { get; set; }
+
+        [Required]
         public string CountryName { get; set; }
         public string CountryCode { get; set; }
     }

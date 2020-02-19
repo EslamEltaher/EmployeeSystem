@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace EmployeeSystem.Application.Models
@@ -20,14 +21,18 @@ namespace EmployeeSystem.Application.Models
     {
         public int Id { get; set; }
 
+        [Required]
         public string Name { get; set; }
+        [Required]
         public string Title { get; set; }
         public float Salary { get; set; }
+        [Required]
         public string Email { get; set; }
         public DateTime BirthDate { get; set; }
         public byte[] Photo { get; set; }
 
         public Country Country { get; set; }
+        [Required]
         public int CountryID { get; set; }
     }
 }
